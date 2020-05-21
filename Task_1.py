@@ -7,15 +7,6 @@ from functools import partial, reduce
 from collections import defaultdict, Counter
 from itertools import chain
 
-DATA_PATH = Path('./data')
-
-file_paths =  {
-    'biblio': DATA_PATH/'data-102277-2020-04-02.csv',
-    'cinema': DATA_PATH/'data-102278-2020-04-02.csv',
-    'culture': DATA_PATH/'data-102279-2020-04-02.csv',
-    'park':  DATA_PATH/'data-4214-2020-04-02.csv'
-}
-
 def load_data(file_path, encoding):
     with open(file_path, encoding=encoding) as f:
         data = f.readlines()     
@@ -99,6 +90,15 @@ def process_park_data(file_path, encoding):
     return data
 
 if __name__ == '__main__':
+    DATA_PATH = Path('./data')
+
+    file_paths =  {
+        'biblio': DATA_PATH/'data-102277-2020-04-02.csv',
+        'cinema': DATA_PATH/'data-102278-2020-04-02.csv',
+        'culture': DATA_PATH/'data-102279-2020-04-02.csv',
+        'park':  DATA_PATH/'data-4214-2020-04-02.csv'
+    }
+    
     encoding = 'windows-1251'
     data_types = ['biblio', 'cinema', 'culture']
     park_data_type = 'park'
