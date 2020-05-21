@@ -109,4 +109,4 @@ Activate new environment
 `source ./py38/bin/activate`  
 
 Install all packages from the py37 environment  
-pip install -r requirements.txt  
+`pip install -r requirements.txt`
