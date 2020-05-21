@@ -55,25 +55,25 @@
 ### Предположения
 **Пример таблицы с данными**
 
-CREATE TABLE services
-    ("patient" varchar(9), "hospital" varchar(10), "date" timestamp, "service_name" varchar(9));
+CREATE TABLE services  
+    ("patient" varchar(9), "hospital" varchar(10), "date" timestamp, "service_name" varchar(9));  
     
-INSERT INTO services
-    ("patient", "hospital", "date", "service_name")
-VALUES
-    ('patient_A', 'hospital_A', '2020-05-01 00:00:00', 'service_A'),
-    ('patient_B', 'hospital_A', '2020-05-04 00:00:00', 'service_B'),
-    ('patient_A', 'hospital_B', '2020-05-01 00:00:00', 'service_B'),
-    ('patient_B', 'hospital_A', '2020-05-03 00:00:00', 'service_C'),
-    ('patient_A', 'hospital_C', '2020-05-01 00:00:00', 'service_C'),
-    ('patient_C', 'hospital_A', '2020-05-02 00:00:00', 'service_B');
+INSERT INTO services  
+    ("patient", "hospital", "date", "service_name")  
+VALUES  
+    ('patient_A', 'hospital_A', '2020-05-01 00:00:00', 'service_A'),  
+    ('patient_B', 'hospital_A', '2020-05-04 00:00:00', 'service_B'),  
+    ('patient_A', 'hospital_B', '2020-05-01 00:00:00', 'service_B'),  
+    ('patient_B', 'hospital_A', '2020-05-03 00:00:00', 'service_C'),  
+    ('patient_A', 'hospital_C', '2020-05-01 00:00:00', 'service_C'),  
+    ('patient_C', 'hospital_A', '2020-05-02 00:00:00', 'service_B');  
 
 ### Ответ
-SELECT service_name,  COUNT(*) AS service_count
-FROM services
-GROUP BY service_name
-ORDER BY service_count DESC
-LIMIT 10;
+SELECT service_name,  COUNT(*) AS service_count  
+FROM services  
+GROUP BY service_name  
+ORDER BY service_count DESC  
+LIMIT 10;  
 
 # Задача 3
 ## Обновление Python
@@ -90,23 +90,23 @@ LIMIT 10;
 - Текущее состояние: находимся в виртуальном окружении с названием py37
 
 ### Ответ
-Save all installed packages in the py37 environment
-`pip freeze > requirements.txt`
+Save all installed packages in the py37 environment  
+`pip freeze > requirements.txt`  
 
-Deactivate current environment
-`deactivate`
+Deactivate current environment  
+`deactivate`  
 
-Update system version of python
-`sudo add-apt-repository ppa:deadsnakes/ppa`
-`sudo apt-get update`
-`sudo apt-get install python3.8`
-`sudo apt-get install python3.8-venv python3.8-dev`
+Update system version of python  
+`sudo add-apt-repository ppa:deadsnakes/ppa`  
+`sudo apt-get update`  
+`sudo apt-get install python3.8`  
+`sudo apt-get install python3.8-venv python3.8-dev`  
+  
+Create new environment  
+`python -m venv py38`  
 
-Create new environment
-`python -m venv py38`
+Activate new environment  
+`source ./py38/bin/activate`  
 
-Activate new environment
-`source ./py38/bin/activate`
-
-Install all packages from the py37 environment
-pip install -r requirements.txt
+Install all packages from the py37 environment  
+pip install -r requirements.txt  
