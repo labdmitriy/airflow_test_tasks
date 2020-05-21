@@ -1,0 +1,22 @@
+Assume that we have python 3.7 (system version) and use virtual environment using venv (e.g., py37).
+
+Save all installed packages in the py37 environment
+pip freeze > requirements.txt
+
+Deactivate current environment
+deactivate
+
+Update system version of python
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.8
+sudo apt-get install python3.8-venv python3.8-dev
+
+Create new environment
+python -m venv py38
+
+Activate new environment
+source ./py38/bin/activate
+
+Install all packages from the py37 environment
+pip install -r requirements.txt

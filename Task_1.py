@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from pathlib import Path
-from operator import itemgetter, add
-from functools import partial, reduce
 import re
+from pathlib import Path
+from operator import itemgetter
+from functools import partial, reduce
 from collections import defaultdict, Counter
 from itertools import chain
 
@@ -54,8 +54,7 @@ def clean_data(elem):
 
 def clean_park_data(elem):
     data = elem.replace('"', '')
-    data = data[data.find('«'):]
-    data = data.lower()
+    data = data.strip().lower()
     
     return (data, 1)
 
@@ -64,19 +63,37 @@ def calculate_count(acc, nxt):
     return acc
 
 def process_data(file_path, encoding):
+    # load data
     data = load_data(file_path, encoding=encoding)
+    
+    # split data by separator
     data = map(split_data, data)
+    
+    # remain only correct records (no header records)
     data = filter(is_correct_record, data)
+    
+    # extract address and number of WiFi points
     data = map(extract_addr_counts, data)
+    
+    # convert address to lower case and WiFi points count to integer
     data = map(clean_data, data)
 
     return data
 
 def process_park_data(file_path, encoding):
+    # load data
     data = load_data(file_path, encoding=encoding)
+    
+    # split data by separator
     data = map(split_data, data)
+    
+    # remain only correct records (no header records)
     data = filter(is_correct_record, data)
+    
+    # extract park name
     data = map(extract_park, data)
+    
+    # convert park name to lower case and add counter with the value 1
     data = map(clean_park_data, data)
     
     return data
@@ -85,12 +102,20 @@ if __name__ == '__main__':
     encoding = 'windows-1251'
     data_types = ['biblio', 'cinema', 'culture']
     park_data_type = 'park'
-
+    
+    # process data from biblio, cinema and culture
     processed_data = map(lambda x: process_data(file_paths[x], encoding=encoding), data_types)
     processed_data = chain.from_iterable(processed_data)
+    
+    # process park data
     processed_park_data = process_park_data(file_paths[park_data_type], encoding=encoding)
+    
+    # combine processed data
     processed_full_data = chain(processed_data, processed_park_data)
-
+    
+    # calculate count of WiFi points by street and park
     results = reduce(calculate_count, processed_full_data, defaultdict(int))
     results = Counter(results)
-    print(results.most_common(5))
+    
+    # show top 5 places with maximum count of WiFi points
+    {print(f'{key}: {value}') for key, value in results.most_common(5)}

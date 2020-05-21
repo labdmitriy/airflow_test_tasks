@@ -1,0 +1,12 @@
+CREATE TABLE services
+    ("patient" varchar(9), "hospital" varchar(10), "date" timestamp, "service_name" varchar(9));
+    
+INSERT INTO services
+    ("patient", "hospital", "date", "service_name")
+VALUES
+    ('patient_A', 'hospital_A', '2020-05-01 00:00:00', 'service_A'),
+    ('patient_B', 'hospital_A', '2020-05-04 00:00:00', 'service_B'),
+    ('patient_A', 'hospital_B', '2020-05-01 00:00:00', 'service_B'),
+    ('patient_B', 'hospital_A', '2020-05-03 00:00:00', 'service_C'),
+    ('patient_A', 'hospital_C', '2020-05-01 00:00:00', 'service_C'),
+    ('patient_C', 'hospital_A', '2020-05-02 00:00:00', 'service_B');
